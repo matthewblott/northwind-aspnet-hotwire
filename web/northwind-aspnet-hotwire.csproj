@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+    <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.13" />
+    <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="OdeToCode.AddFeatureFolders" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.16" />
   </ItemGroup>
@@ -16,7 +23,18 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(ClientAppFolder)**" />
+    <Folder Include="Application\Employees\Commands\" />
     <Folder Include="ClientApp\public\" />
+    <Folder Include="Data\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\_ViewStart.cshtml" />
   </ItemGroup>
 
   <Target Name="EnsureNodeModules" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(ClientAppFolder)\node_modules') ">
