@@ -1,3 +1,5 @@
+using Northwind.Infrastructure;
+using Northwind.Infrastructure.Data;
 using Northwind.WebUI.Hubs;
 using Northwind.WebUI.Services;
 
@@ -14,17 +16,28 @@ var app = builder.Build();
 
 ConfigureApplication(app);
 
+Seed(app);
+
 app.Run();
 
 static void RegisterServices(IHostApplicationBuilder builder)
 {
   var services = builder.Services;
-    
+
+  services.AddInfrastructure();
   services.AddControllersWithViews().AddFeatureFolders().AddRazorRuntimeCompilation();
   services.AddHttpContextAccessor();
   services.AddTransient<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();
-  services.AddMediator();
+  services.AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped);
   services.AddSignalR();
+    
+}
+
+static void Seed(WebApplication app)
+{
+  using var scope = app.Services.CreateScope();
+  var dataContext = scope.ServiceProvider.GetRequiredService<NorthwindDbContext>();
+  Northwind.Infrastructure.Data.Seed.SeedData(dataContext);
 }
 
 static void ConfigureApplication(WebApplication app)

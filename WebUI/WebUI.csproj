@@ -25,7 +25,6 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(ClientAppFolder)**" />
     <Folder Include="ClientApp\public\" />
-    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,76 @@
+namespace Northwind.Infrastructure.Data;
+
+using Microsoft.Extensions.DependencyInjection;
+    
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Application.Common.Interfaces;
+using Domain;
+
+public class NorthwindDbContext : DbContext, INorthwindDbContext, IDbContextTransaction {
+  public DbSet<Employee> Employees { get; set; }
+  private IDbContextTransaction? _currentTransaction;
+
+  public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options)
+  {
+  }
+    
+  public void Commit()
+  {
+    CommitAsync();
+  }
+
+  public Task CommitAsync(CancellationToken cancellationToken = new CancellationToken())
+  {
+    try
+    {
+      SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+      if (_currentTransaction != null)
+      {
+        _currentTransaction!.CommitAsync(cancellationToken);
+      }
+    }
+    catch
+    {
+      Rollback();
+      throw;
+    }
+    finally
+    {
+      if (_currentTransaction != null)
+      {
+        _currentTransaction.Dispose();
+        _currentTransaction = null;
+      }
+    }
+   
+    return Task.CompletedTask;
+  }
+
+  public void Rollback()
+  {
+    RollbackAsync();
+  }
+
+  public Task RollbackAsync(CancellationToken cancellationToken = new CancellationToken())
+  {
+    try
+    {
+      _currentTransaction?.RollbackAsync(cancellationToken);
+    }
+    finally
+    {
+      if (_currentTransaction != null)
+      {
+        _currentTransaction.Dispose();
+        _currentTransaction = null;
+      }
+        
+    }
+
+    return Task.CompletedTask;
+  }
+
+  public Guid TransactionId { get; }
+}
