@@ -1,0 +1,18 @@
+@model Northwind.Application.Employees.Shared.Models.Employee
+
+<h1>Employee</h1>
+
+<form asp-action="Update" method="post">
+  <div>
+    <input asp-for="Id">
+  </div>
+  <div>
+    <input asp-for="FirstName">
+  </div>
+  <div>
+    <input asp-for="LastName">
+  </div> 
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>

@@ -7,9 +7,10 @@ using Shared.Models;
 
 public class Create
 {
-  public sealed record Command : IRequest<int>
+  public sealed record Command : ICommand<int>
   {
      public string FirstName { get; set; }
+     public string LastName { get; set; }
   }
     
   public class Validator : AbstractValidator<Employee>
@@ -20,17 +21,24 @@ public class Create
     }
   }
 
-  public sealed class Handler(INorthwindDbContext db) : IRequestHandler<Command, int>
+  public sealed class Handler(INorthwindDbContext db) : ICommandHandler<Command, int>
   {
     public ValueTask<int> Handle(Command command, CancellationToken cancellationToken)
     {
+      var newId = db.Employees.Count() + 1;
+      
       var employee = new Domain.Employee
       {
-        FirstName = command.FirstName
+        Id = newId,
+        FirstName = command.FirstName,
+        LastName = command.LastName,
       };
 
       db.Employees.Add(employee);
-      var id = employee.Id;       
+      
+      var id = employee.Id;
+        
+      db.CommitAsync(cancellationToken);
         
       return ValueTask.FromResult(id);
     }

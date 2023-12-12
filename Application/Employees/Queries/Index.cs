@@ -3,7 +3,6 @@ namespace Northwind.Application.Employees.Queries;
 using Common.Interfaces;
 using Domain;
 using Mediator;
-using Microsoft.EntityFrameworkCore;
 using Riok.Mapperly.Abstractions;
 
 [Mapper]

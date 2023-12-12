@@ -10,6 +10,6 @@ public abstract class Seed
     context.Employees.Add(new Employee { Id = 2, FirstName = "Gary", LastName = "Cooper", });
     context.Employees.Add(new Employee { Id = 3, FirstName = "Julie", LastName = "Andrews", });
     context.Employees.Add(new Employee { Id = 4, FirstName = "Marilyn", LastName = "Monroe", });
-    context.SaveChangesAsync();
+    context.CommitAsync();
   }
 }

@@ -1,19 +1,16 @@
 namespace Northwind.Infrastructure.Data;
 
-using Microsoft.Extensions.DependencyInjection;
-    
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Application.Common.Interfaces;
 using Domain;
 
-public class NorthwindDbContext : DbContext, INorthwindDbContext, IDbContextTransaction {
+public class NorthwindDbContext : DbContext, INorthwindDbContext, IDbContextTransaction
+{
   public DbSet<Employee> Employees { get; set; }
   private IDbContextTransaction? _currentTransaction;
 
-  public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options)
-  {
-  }
+  public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
     
   public void Commit()
   {

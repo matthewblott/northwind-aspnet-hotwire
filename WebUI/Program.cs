@@ -20,6 +20,8 @@ Seed(app);
 
 app.Run();
 
+return;
+
 static void RegisterServices(IHostApplicationBuilder builder)
 {
   var services = builder.Services;
@@ -33,7 +35,7 @@ static void RegisterServices(IHostApplicationBuilder builder)
     
 }
 
-static void Seed(WebApplication app)
+static void Seed(IHost app)
 {
   using var scope = app.Services.CreateScope();
   var dataContext = scope.ServiceProvider.GetRequiredService<NorthwindDbContext>();
@@ -45,11 +47,13 @@ static void ConfigureApplication(WebApplication app)
   app.UseStaticFiles();
   app.UseRouting();
   app.UseAuthorization();
+#pragma warning disable ASP0014
   app.UseEndpoints(endpoints =>
   {
     endpoints.MapControllers();
     endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
   });
+#pragma warning restore ASP0014
       
   if (app.Environment.IsDevelopment())
   {
