@@ -1,40 +1,21 @@
 namespace Northwind.Application.Employees.Queries;
 
 using Common.Interfaces;
-using Domain;
 using Mediator;
-using Riok.Mapperly.Abstractions;
-
-[Mapper]
-public static partial class Mapper
-{
-  public static partial Index.Model To(this Employee model);
-} 
+using Shared.Models;
+using static Shared.Mapper;
 
 public class Index
 {
-  public record Query : IQuery<IReadOnlyList<Model>>;
+  public record Query : IQuery<IReadOnlyList<Employee>>;
 
-  public record Model
+  public class Handler(INorthwindDbContext db) : IQueryHandler<Query, IReadOnlyList<Employee>>
   {
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-  }
-
-  public class Handler(INorthwindDbContext db) : IQueryHandler<Query, IReadOnlyList<Model>>
-  {
-    public ValueTask<IReadOnlyList<Model>> Handle(Query query,
+    public ValueTask<IReadOnlyList<Employee>> Handle(Query query,
       CancellationToken cancellationToken)
     {
-      var employees = db.Employees.ToList();
-      var models = new List<Model>();
-
-      employees.ForEach(emp => models.Add(emp.To()));
-
-      IReadOnlyList<Model> list = models.ToList();
-      
-      return ValueTask.FromResult(list);
+      IReadOnlyList<Employee> employees = db.Employees.ProjectToDto().ToList();
+      return ValueTask.FromResult(employees);
     }
   }
 }

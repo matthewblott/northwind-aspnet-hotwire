@@ -1,14 +1,5 @@
-@model Northwind.Application.Employees.Shared.Models.Employee
+<h1>Employee</h1>
 
 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-
-<h1>Employee</h1>
-<div>
-  <input asp-for="Id">
-</div>
-<div>
-  <input asp-for="FirstName">
-</div>
-<div>
-  <input asp-for="LastName">
-</div> 
+<a asp-action="Index">Cancel</a>
+<partial name="_Form" />

@@ -1,18 +1,14 @@
-@model Northwind.Application.Employees.Shared.Models.Employee
+@using Northwind.Application.Employees.Shared.Models
+@model Employee
 
-<h1>Employee</h1>
+<h1>Edit Employee</h1>
 
-<form asp-action="Update" method="post">
-  <div>
-    <input asp-for="Id">
-  </div>
-  <div>
-    <input asp-for="FirstName">
-  </div>
-  <div>
-    <input asp-for="LastName">
-  </div> 
-  <div>
-    <button type="submit">Submit</button>
-  </div>
+<button asp-action="Update" form="employee-form">Update</button>
+<button form="employee-delete-form">Delete</button>
+<a asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+
+<form asp-action="Delete" method="post" id="employee-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
 </form>
+
+<partial name="_Form" />

@@ -1,45 +1,39 @@
 namespace Northwind.Application.Employees.Commands;
 
 using Common.Interfaces;
-using FluentValidation;
+using FluentValidation.Results;
 using Mediator;
-using Queries;
+using Shared;
 using Shared.Models;
-using Mapper = Shared.Mapper;
 
 public class Update
 {
-  public sealed record Command : ICommand<Employee>
+  public sealed record Command : ICommand<(Employee Model, IEnumerable<ValidationFailure> Errors)>
   {
-     public int Id { get; set; } 
-     public string FirstName { get; set; }
-     public string LastName { get; set; }
+    public Employee Model{ get; set; } 
   }
     
-  public class Validator : AbstractValidator<Employee>
+  public sealed class Handler(INorthwindDbContext db) : ICommandHandler<Command, (Employee Model, IEnumerable<ValidationFailure> Errors)>
   {
-    public Validator()
+    public ValueTask<(Employee Model, IEnumerable<ValidationFailure> Errors)> Handle(Command command, CancellationToken cancellationToken)
     {
-      RuleFor(x => x.FirstName).Length(1, 40);
-    }
-  }
+      var validator = new Shared.Validators.EmployeeValidator();
+      var result = validator.Validate(command.Model);
 
-  public sealed class Handler(INorthwindDbContext db) : ICommandHandler<Command, Employee>
-  {
-    public ValueTask<Employee> Handle(Command command, CancellationToken cancellationToken)
-    {
-      var employee = db.Employees.Find(command.Id);
-
-      employee.FirstName = command.FirstName;
-      employee.LastName = command.LastName; 
-
+      IEnumerable<ValidationFailure> errors = result.Errors;
+        
+      if (!result.IsValid)
+      {
+        return ValueTask.FromResult((command.Model, errors));
+      }
+        
+      var employee = command.Model.FromDto();
+        
       db.Employees.Update(employee);
         
       db.CommitAsync(cancellationToken);
-
-      var empDto = Mapper.ToDto(employee);
-        
-      return ValueTask.FromResult(empDto);
+      
+      return ValueTask.FromResult((command.Model, errors));
     }
   }
 

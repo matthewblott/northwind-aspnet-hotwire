@@ -1,0 +1,13 @@
+@using Northwind.Application.Employees.Shared.Models
+@model Employee
+
+<form method="post" id="employee-form">
+  <input asp-for="Id" type="hidden" asp-model-prefix>
+  <div>
+    <input asp-for="FirstName" asp-model-prefix>
+    <error asp-for="FirstName"></error> 
+  </div>
+  <div>
+    <input asp-for="LastName" asp-model-prefix>
+  </div> 
+</form>

@@ -1,3 +1,6 @@
+using FluentValidation;
+using Northwind.Application.Employees.Shared.Models;
+using Northwind.Application.Employees.Shared.Validators;
 using Northwind.Infrastructure;
 using Northwind.Infrastructure.Data;
 using Northwind.WebUI.Hubs;
@@ -11,7 +14,6 @@ using Northwind.WebUI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 RegisterServices(builder);
-
 var app = builder.Build();
 
 ConfigureApplication(app);
@@ -32,6 +34,8 @@ static void RegisterServices(IHostApplicationBuilder builder)
   services.AddTransient<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();
   services.AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped);
   services.AddSignalR();
+  
+  services.AddScoped<IValidator<Employee>, EmployeeValidator>();
     
 }
 

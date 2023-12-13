@@ -4,6 +4,7 @@ using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Application.Employees.Queries;
 using Northwind.Application.Employees.Commands;
+using Index = Application.Employees.Queries.Index;
 
 public class EmployeesController(ISender mediator) : Controller
 {
@@ -37,8 +38,8 @@ public class EmployeesController(ISender mediator) : Controller
   public async Task<IActionResult> Create(Create.Command command)
   {
     var result = await mediator.Send(command);
-    var id = Convert.ToInt32(result);
-      
+    var id = Convert.ToInt32(result.Id);
+    
     return RedirectToAction(nameof(Show), new { id } );
   }
     
@@ -46,8 +47,28 @@ public class EmployeesController(ISender mediator) : Controller
   public async Task<IActionResult> Update(Update.Command command)
   {
     var result = await mediator.Send(command);
-     
-    return View("Edit", result);
+
+    foreach (var error in result.Errors)
+    {
+      foreach (var key in this.ModelState.Keys)
+      {
+        if (key == error.PropertyName)
+        {
+          
+        }
+      }       
+      this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+    }
+    
+    
+    
+    return View("Edit", result.Model);
   }
   
+  [HttpPost]
+  public async Task<IActionResult> Delete(Delete.Command command)
+  {
+    await mediator.Send(command);
+    return RedirectToAction(nameof(Index));
+  }
 }
