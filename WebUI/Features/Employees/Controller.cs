@@ -1,5 +1,6 @@
 namespace Northwind.WebUI.Features.Employees;
 
+using Application.Employees.Shared.Models;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Application.Employees.Queries;
@@ -24,7 +25,7 @@ public class EmployeesController(ISender mediator) : Controller
     
   public IActionResult New()
   {
-    return View();
+    return View(new Employee());
   }
     
   [Route("[controller]/{id:int}/edit")]
@@ -38,9 +39,21 @@ public class EmployeesController(ISender mediator) : Controller
   public async Task<IActionResult> Create(Create.Command command)
   {
     var result = await mediator.Send(command);
-    var id = Convert.ToInt32(result.Id);
-    
-    return RedirectToAction(nameof(Show), new { id } );
+    var id = Convert.ToInt32(result.Model.Id);
+
+    if (id >= 1)
+    {
+      return RedirectToAction(nameof(Show), new {id});
+    }
+      
+    foreach (var error in result.Errors)
+    {
+      ModelState.Remove(error.PropertyName);
+      ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+    }
+
+    HttpContext.Response.StatusCode = 422;  
+    return View("New", result.Model);
   }
     
   [HttpPost]
@@ -48,20 +61,18 @@ public class EmployeesController(ISender mediator) : Controller
   {
     var result = await mediator.Send(command);
 
-    foreach (var error in result.Errors)
+    if (!result.Errors.Any())
     {
-      foreach (var key in this.ModelState.Keys)
-      {
-        if (key == error.PropertyName)
-        {
-          
-        }
-      }       
-      this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+      return RedirectToAction(nameof(Show), new {id = Convert.ToInt32(result.Model.Id)});
     }
     
+    foreach (var error in result.Errors)
+    {
+      ModelState.Remove(error.PropertyName);
+      ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+    }
     
-    
+    HttpContext.Response.StatusCode = 422;  
     return View("Edit", result.Model);
   }
   

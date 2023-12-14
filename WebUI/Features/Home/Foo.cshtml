@@ -1,0 +1,13 @@
+@model Northwind.WebUI.Features.Home.Foo
+
+<turbo-frame id="foo-frame">
+  <form asp-action="Foo" method="post">
+   
+    <div>
+      <input asp-for="Name">
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div> 
+  </form>
+</turbo-frame>

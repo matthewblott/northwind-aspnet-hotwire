@@ -5,9 +5,11 @@
   <input asp-for="Id" type="hidden" asp-model-prefix>
   <div>
     <input asp-for="FirstName" asp-model-prefix>
-    <error asp-for="FirstName"></error> 
+    @* <input asp-for="FirstName"> *@
+    <span asp-validation-for="FirstName"></span> 
   </div>
   <div>
     <input asp-for="LastName" asp-model-prefix>
+    <span asp-validation-for="LastName"></span> 
   </div> 
 </form>

@@ -6,9 +6,7 @@
 <button asp-action="Update" form="employee-form">Update</button>
 <button form="employee-delete-form">Delete</button>
 <a asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
-
 <form asp-action="Delete" method="post" id="employee-delete-form">
   <input type="hidden" name="Id" value="@Model.Id">
 </form>
-
 <partial name="_Form" />
