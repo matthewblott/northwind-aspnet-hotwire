@@ -3,13 +3,26 @@
 
 <form method="post" id="employee-form">
   <input asp-for="Id" type="hidden" asp-model-prefix>
-  <div>
-    <input asp-for="FirstName" asp-model-prefix>
-    @* <input asp-for="FirstName"> *@
-    <span asp-validation-for="FirstName"></span> 
-  </div>
-  <div>
-    <input asp-for="LastName" asp-model-prefix>
-    <span asp-validation-for="LastName"></span> 
-  </div> 
+  <fieldset>
+    <field>
+      <label asp-for="Email"></label> 
+      <input asp-for="Email" type="email" asp-model-prefix>
+      <span asp-validation-for="Email"></span> 
+    </field>
+    <field>
+      <label asp-for="FirstName"></label> 
+      <input asp-for="FirstName" asp-model-prefix>
+      <span asp-validation-for="FirstName"></span> 
+    </field>
+    <field>
+      <label asp-for="LastName"></label> 
+      <input asp-for="LastName" asp-model-prefix>
+      <span asp-validation-for="LastName"></span> 
+    </field>
+    <field>
+      <label asp-for="BirthDate"></label> 
+      <input asp-for="BirthDate" type="date" asp-model-prefix>
+      <span asp-validation-for="BirthDate"></span> 
+    </field> 
+  </fieldset>
 </form>

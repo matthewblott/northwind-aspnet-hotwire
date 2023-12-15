@@ -29,7 +29,7 @@ public class Create
         
       var employee = command.Model.FromDto();
       
-      employee.Id = db.Employees.Count() + 1;
+      // employee.Id = db.Employees.Count() + 1;
              
       db.Employees.Add(employee);
         

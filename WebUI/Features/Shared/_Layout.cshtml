@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" type="image/svg+xml" href="~/img/favicon.ico">
-  <title>@ViewData["Title"]</title>
-  <environment names="Staging,Production">
-    <link rel="stylesheet" asp-href-include="~/dist/assets/main-*.css" />
-  </environment>
+  <partial name="_Head"/>
 </head>
-<body>
-  <main id="app">
-    @RenderBody()
-  </main>
-  <environment names="Development">
-    <script type="module" src="~/dist/@@vite/client"></script>
-    <script type="module" src="~/dist/js/main.js"></script>
-  </environment>
-  <environment names="Staging,Production">
-    <script type="module" asp-src-include="~/dist/assets/main-*.js"></script>
-  </environment>
-  @await RenderSectionAsync("Scripts", required: false)
+<body id="app">
+<header>
+  <partial name="_Header"/>
+</header>
+<main>
+  @RenderBody()
+</main>
+<partial name="_Footer"/>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -12,7 +12,6 @@ public class EmployeesController(ISender mediator) : Controller
   public async Task<ViewResult> Index([FromQuery] Index.Query query)
   {
     var result = await mediator.Send(query);
-
     return View(result);
   }
 
@@ -52,7 +51,7 @@ public class EmployeesController(ISender mediator) : Controller
       ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
     }
 
-    HttpContext.Response.StatusCode = 422;  
+    HttpContext.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;  
     return View("New", result.Model);
   }
     
@@ -72,7 +71,7 @@ public class EmployeesController(ISender mediator) : Controller
       ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
     }
     
-    HttpContext.Response.StatusCode = 422;  
+    HttpContext.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;  
     return View("Edit", result.Model);
   }
   

@@ -2,8 +2,6 @@ namespace Northwind.Application.Employees.Commands;
 
 using Common.Interfaces;
 using Mediator;
-using Shared;
-using Shared.Models;
 
 public class Delete
 {

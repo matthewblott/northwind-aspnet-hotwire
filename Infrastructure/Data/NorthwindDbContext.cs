@@ -8,6 +8,7 @@ using Domain;
 public class NorthwindDbContext : DbContext, INorthwindDbContext, IDbContextTransaction
 {
   public DbSet<Employee> Employees { get; set; }
+  public DbSet<Customer> Customers { get; set; }
   private IDbContextTransaction? _currentTransaction;
 
   public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
@@ -28,8 +29,9 @@ public class NorthwindDbContext : DbContext, INorthwindDbContext, IDbContextTran
         _currentTransaction!.CommitAsync(cancellationToken);
       }
     }
-    catch
+    catch(Exception ex)
     {
+      Console.WriteLine(ex.Message);
       Rollback();
       throw;
     }
