@@ -8,21 +8,23 @@ public abstract class Seed
   public static void SeedData(NorthwindDbContext context)
   {
     var faker = new Faker();
-      
+
     // Employees
-    for (var i = 0; i < 10; i++)
+    foreach(var _ in Enumerable.Range(1, 50))
     {
-      context.Employees.Add(new Employee { 
+      context.Employees.Add(new Employee 
+      { 
         Email = faker.Internet.Email(),
         BirthDate = DateOnly.FromDateTime(faker.Person.DateOfBirth),
         HireDate = DateOnly.FromDateTime(faker.Date.Past()),
         Title = faker.Name.JobTitle(),
         FirstName = faker.Name.FirstName(), 
-        LastName = faker.Name.LastName(), });
+        LastName = faker.Name.LastName(), 
+      });
     }
       
-    //Customers
-    for (var i = 0; i < 10; i++)
+    //Customer
+    foreach(var _ in Enumerable.Range(1, 50))
     {
       context.Customers.Add(new Customer
       {

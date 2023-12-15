@@ -14,6 +14,7 @@ using Northwind.WebUI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 RegisterServices(builder);
+
 var app = builder.Build();
 
 ConfigureApplication(app);
@@ -27,8 +28,9 @@ return;
 static void RegisterServices(IHostApplicationBuilder builder)
 {
   var services = builder.Services;
-
-  services.AddInfrastructure();
+  var connectionString = $"Data Source={Path.Combine(builder.Environment.ContentRootPath, "data", "northwind.sqlite")}";
+    
+  services.AddInfrastructure(connectionString);
   services.AddControllersWithViews().AddFeatureFolders().AddRazorRuntimeCompilation();
   services.AddHttpContextAccessor();
   services.AddTransient<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();

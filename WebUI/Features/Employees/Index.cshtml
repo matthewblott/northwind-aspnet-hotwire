@@ -1,8 +1,19 @@
-@model IReadOnlyList<Northwind.Application.Employees.Shared.Models.Employee>
+@using X.PagedList.Mvc.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model X.PagedList.IPagedList<Northwind.Application.Employees.Shared.Models.Employee>
+
+<style>
+  .pagination li {
+    display: inline;
+    padding: 0 12px;
+  }
+</style>
 
 <h1>Employees</h1>
 
 <a role="button" asp-action="New">New</a>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 <table class="table">
   <thead>
@@ -20,7 +31,7 @@
   </thead>
   <tbody>
   
-  @foreach (var item in Model)
+  @foreach (var item in Model.AsEnumerable())
   {
     <tr>
       <td>
