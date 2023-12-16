@@ -1,0 +1,13 @@
+@using Northwind.Application.Categories.Shared.Models
+@model Category
+
+<form method="post" id="category-form">
+  <input asp-for="Id" type="hidden" asp-model-prefix>
+  <fieldset>
+    <field>
+      <label asp-for="Name"></label>
+      <input asp-for="Name" asp-model-prefix>
+      <span asp-validation-for="Name"></span>
+    </field>
+  </fieldset>
+</form>

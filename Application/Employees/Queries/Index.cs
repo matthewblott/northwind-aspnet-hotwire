@@ -12,14 +12,14 @@ public class Index
   {
     public int Page { get; set; } = 1;
   }
-    
+
   public class Handler(INorthwindDbContext db) : IQueryHandler<Query, IPagedList<Employee>>
   {
     public async ValueTask<IPagedList<Employee>> Handle(Query query,
       CancellationToken cancellationToken)
     {
-      var pagedList = await db.Employees.ToList().ProjectToDto().ToPagedListAsync(query.Page, 10, cancellationToken);
-      return await ValueTask.FromResult(pagedList);
+      var employees = await db.Employees.ToList().ProjectToDto().ToPagedListAsync(query.Page, 10, cancellationToken);
+      return await ValueTask.FromResult(employees);
     }
   }
 }

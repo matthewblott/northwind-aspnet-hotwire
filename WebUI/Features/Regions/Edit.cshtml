@@ -1,0 +1,12 @@
+@using Northwind.Application.Regions.Shared.Models
+@model Region
+
+<h1>Edit Region</h1>
+
+<button asp-action="Update" form="region-form">Update</button>
+<button form="region-delete-form">Delete</button>
+<a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+<form asp-action="Delete" method="post" id="region-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
+</form>
+<partial name="_Form" />

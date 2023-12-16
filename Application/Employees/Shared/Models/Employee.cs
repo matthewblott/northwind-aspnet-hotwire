@@ -8,5 +8,5 @@ public record Employee
   public string LastName { get; set; }
   public DateOnly BirthDate { get; set; }
   public DateOnly HireDate { get; set; }
-  public string Title { get; set; }
+  public string Title { get; set; } = string.Empty;
 }

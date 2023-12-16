@@ -1,0 +1,12 @@
+@using Northwind.Application.Categories.Shared.Models
+@model Category
+
+<h1>Edit Category</h1>
+
+<button asp-action="Update" form="category-form">Update</button>
+<button form="category-delete-form">Delete</button>
+<a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+<form asp-action="Delete" method="post" id="category-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
+</form>
+<partial name="_Form" />

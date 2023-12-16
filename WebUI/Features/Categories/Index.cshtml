@@ -1,0 +1,35 @@
+@using X.PagedList.Mvc.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model X.PagedList.IPagedList<Northwind.Application.Categories.Shared.Models.Category>
+
+  <h1>Categories</h1>
+
+  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+  <a role="button" asp-action="New">New</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          Name
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      @foreach (var item in Model.AsEnumerable())
+      {
+      <tr>
+        <td>
+          <a asp-action="Show" asp-route-id="@item.Id">@item.Id</a>
+        </td>
+        <td>
+          @item.Name
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>

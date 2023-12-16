@@ -2,15 +2,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model X.PagedList.IPagedList<Northwind.Application.Employees.Shared.Models.Employee>
 
-<style>
-  .pagination li {
-    display: inline;
-    padding: 0 12px;
-  }
-</style>
-
 <h1>Employees</h1>
-
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 <a role="button" asp-action="New">New</a>

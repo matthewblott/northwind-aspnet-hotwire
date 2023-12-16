@@ -1,0 +1,12 @@
+@using Northwind.Application.Shippers.Shared.Models
+@model Shipper
+
+<h1>Edit Shipper</h1>
+
+<button asp-action="Update" form="shipper-form">Update</button>
+<button form="shipper-delete-form">Delete</button>
+<a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+<form asp-action="Delete" method="post" id="shipper-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
+</form>
+<partial name="_Form" />

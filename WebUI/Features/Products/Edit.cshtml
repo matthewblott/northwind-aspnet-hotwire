@@ -1,0 +1,12 @@
+@using Northwind.Application.Products.Shared.Models
+@model Product
+
+<h1>Edit Product</h1>
+
+<button asp-action="Update" form="product-form">Update</button>
+<button form="product-delete-form">Delete</button>
+<a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+<form asp-action="Delete" method="post" id="product-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
+</form>
+<partial name="_Form" />

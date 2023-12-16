@@ -1,12 +1,14 @@
 namespace Northwind.Domain;
 
-public class Customer
+using System.ComponentModel.DataAnnotations;
+
+public record Customer
 {
-  public int Id { get; set; }
+  [Key]
+  public required string Id { get; set; }
   public required string CompanyName { get; set; }
-  public required string ContactName { get; set; }
-  public required string ContactTitle { get; set; }
-  public string Region { get; set; } = string.Empty;
-  public required string Phone { get; set; }
+  public required string ContactName { get; set; } 
+  public required string ContactTitle { get; set; } = string.Empty;
+  public required string Phone { get; set; } = string.Empty;
   public string Fax { get; set; } = string.Empty;
 }

@@ -1,0 +1,12 @@
+@using Northwind.Application.Addresses.Shared.Models
+@model Address
+
+<h1>Edit Address</h1>
+
+<button asp-action="Update" form="address-form">Update</button>
+<button form="address-delete-form">Delete</button>
+<a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>
+<form asp-action="Delete" method="post" id="address-delete-form">
+  <input type="hidden" name="Id" value="@Model.Id">
+</form>
+<partial name="_Form" />
