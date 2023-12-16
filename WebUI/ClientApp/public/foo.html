@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.ico">
+  <title></title>
+  <style>
+  </style>
+</head>
+<body id="app">
+<header>
+  <input id="menu" type="checkbox" />
+  <span style="padding-right: 5px">
+  <a href="/">Northwind</a>
+  </span>
+  <nav>
+    <ul>
+      <li><a href="/addresses">Addresses</a></li>
+      <li><a href="/categories">Categories</a></li>
+      <li><a href="/customers">Customers</a></li>
+      <li><a href="/employees">Employees</a></li>
+      <li><a href="/orders">Orders</a></li>
+      <li><a href="/products">Products</a></li>
+      <li><a href="/regions">Regions</a></li>
+      <li><a href="/shippers">Shippers</a></li>
+      <li><a href="/suppliers">Suppliers</a></li>
+    </ul>
+    <ul>
+      <li>
+        <span>Hello {name}</span>
+      </li>
+      <li>
+        <Logout />
+      </li>
+    </ul>
+  </nav>
+  <label for="menu" />
+</header>
+<main>
+  <h1>Employees</h1>
+  <div class="pagination-container">
+    <ul class="pagination">
+      <li class="active">
+        <span>1</span>
+      </li>
+      <li>
+        <a href="/Employees?page=2">2</a>
+      </li>
+      <li>
+        <a href="/Employees?page=3">3</a>
+      </li>
+      <li>
+        <a href="/Employees?page=4">4</a>
+      </li>
+      <li>
+        <a href="/Employees?page=5">5</a>
+      </li>
+      <li class="PagedList-skipToNext">
+        <a href="/Employees?page=2" rel="next">&gt;</a>
+      </li>
+    </ul>
+  </div>
+
+  <a role="button" href="/Employees/New">New</a>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        Id
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <a href="/Employees/1">1</a>
+      </td>
+      <td>
+        Mac
+      </td>
+      <td>
+        Bechtelar
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/2">2</a>
+      </td>
+      <td>
+        Electa
+      </td>
+      <td>
+        Borer
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/3">3</a>
+      </td>
+      <td>
+        Kelton
+      </td>
+      <td>
+        Haley
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/4">4</a>
+      </td>
+      <td>
+        Carmen
+      </td>
+      <td>
+        Hodkiewicz
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/5">5</a>
+      </td>
+      <td>
+        Roslyn
+      </td>
+      <td>
+        Swift
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/6">6</a>
+      </td>
+      <td>
+        Bernardo
+      </td>
+      <td>
+        Schumm
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/7">7</a>
+      </td>
+      <td>
+        Brenna
+      </td>
+      <td>
+        Mayert
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/8">8</a>
+      </td>
+      <td>
+        Amya
+      </td>
+      <td>
+        Effertz
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/9">9</a>
+      </td>
+      <td>
+        Lonny
+      </td>
+      <td>
+        Bahringer
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/Employees/10">10</a>
+      </td>
+      <td>
+        Gladyce
+      </td>
+      <td>
+        White
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</main>
+
+<script type="module" src="/dist/@vite/client"></script>
+<script type="module" src="/dist/js/main.js"></script>
+
+
+
+
+</body>
+</html>

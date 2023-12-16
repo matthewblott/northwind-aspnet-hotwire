@@ -20,7 +20,7 @@
 * #3B45B8
 * */
 
-button, a[role="button"] {
+button, a[role="button"], .pagination li {
   border-radius: var(--border-radius);
   color: inherit;
   color: var(--bg-color);

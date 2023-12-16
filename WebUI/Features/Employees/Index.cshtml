@@ -11,9 +11,9 @@
 
 <h1>Employees</h1>
 
-<a role="button" asp-action="New">New</a>
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<a role="button" asp-action="New">New</a>
 
 <table class="table">
   <thead>
