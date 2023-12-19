@@ -16,5 +16,7 @@ public record Employee
   public string Title { get; set; } = string.Empty;
   public string TitleOfCourtesy { get; set; } = string.Empty;
   public string Phone { get; set; } = string.Empty;
-  // public Employee LineManager { get; set; }
+    
+  public Employee LineManager { get; set; }
+  public ICollection<Employee> Subordinates { get; private set; } = new HashSet<Employee>();
 }

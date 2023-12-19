@@ -18,7 +18,9 @@ public class Index
     public async ValueTask<IPagedList<Product>> Handle(Query query,
       CancellationToken cancellationToken)
     {
-      var products = await db.Products.ToList().ProjectToDto().ToPagedListAsync(query.Page, 10, cancellationToken);
+      // var products = await db.Products.ToList().ProjectToDto().ToPagedListAsync(query.Page, 10, cancellationToken);
+      var allProducts = db.Products.ToList();
+      var products = await allProducts.ProjectToDto().ToPagedListAsync(query.Page, 10, cancellationToken);
       return await ValueTask.FromResult(products);
     }
   }

@@ -9,8 +9,23 @@ public abstract class Seed
   public static void SeedData(NorthwindDbContext context)
   {
     var faker = new Faker();
+      
+    // Address
+    foreach (var _ in Enumerable.Range(1, 50))
+    {
+      context.Addresses.Add(new Address
+      {
+        AddressLine1 = faker.Address.StreetAddress(),
+        AddressLine2 = faker.Address.SecondaryAddress(),
+        PostalTown = faker.Address.City(),
+        County = faker.Address.County(),
+        Country = faker.Address.Country(),
+        Name = faker.Name.FullName(),
+        PostCode = faker.Address.ZipCode(),
+      });
+    }
 
-    //Customer
+    // Customer
     foreach (var _ in Enumerable.Range(1, 50))
     {
       context.Customers.Add(new Customer
@@ -45,6 +60,17 @@ public abstract class Seed
         Name = faker.Address.CountryOfUnitedKingdom(),
       });
     }
+    
+    // Products
+    foreach (var _ in Enumerable.Range(1, 50))
+    {
+      context.Products.Add(new Product
+      {
+        Name = faker.Commerce.ProductName(),
+        QuantityPerUnit = string.Empty,
+      });
+    }
+      
     context.CommitAsync();
   }
 }

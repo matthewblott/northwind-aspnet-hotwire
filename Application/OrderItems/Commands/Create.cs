@@ -32,7 +32,7 @@ public class Create
       db.OrderItems.Add(order);
 
       db.CommitAsync(cancellationToken);
-      command.Model.Id = order.Id;
+      // command.Model.Id = order.Id;
       return ValueTask.FromResult((command.Model, errors));
     }
   }
