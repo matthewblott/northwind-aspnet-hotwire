@@ -14,7 +14,7 @@ public record Product
   public short ReorderLevel { get; set; }
   public bool Discontinued { get; set; }
   
-  // public ICollection<OrderItem> OrderItems { get; private set; } = new HashSet<OrderItem>();
-  // public Category Category { get; set; }
-  // public Supplier Supplier { get; set; }
+  public ICollection<OrderItem> OrderItems { get; private set; } = new HashSet<OrderItem>();
+  public Category Category { get; set; }
+  public Supplier Supplier { get; set; }
 }

@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Categories\Scripts\" />
     <Folder Include="Storage\" />
   </ItemGroup>
 

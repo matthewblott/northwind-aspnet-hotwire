@@ -1,6 +1,3 @@
-using FluentValidation;
-using Northwind.Application.Employees.Shared.Models;
-using Northwind.Application.Employees.Shared.Validators;
 using Northwind.Infrastructure;
 using Northwind.Infrastructure.Data;
 using Northwind.WebUI.Hubs;

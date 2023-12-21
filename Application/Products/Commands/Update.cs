@@ -31,8 +31,8 @@ public class Update
 
       db.Products.Update(region);
 
-      db.CommitAsync(cancellationToken);
-
+      var result2 = db.CommitAsync(cancellationToken);
+      
       return ValueTask.FromResult((command.Model, errors));
     }
   }
