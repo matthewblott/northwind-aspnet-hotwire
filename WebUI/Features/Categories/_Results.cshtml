@@ -1,0 +1,18 @@
+@model IReadOnlyList<Northwind.Application.Categories.Shared.Models.Category>
+<turbo-frame id="search-frame">
+  <form method="get" asp-controller="Categories" asp-action="Search" id="the_form"></form>
+  <ul
+    id="inboxes"
+    data-controller="categories--results"
+    data-categories--results-target="the_list"
+    data-action="categories--results:selected->categories--search#selected"
+    data-categories--results-field-param="the_input">
+    @foreach (var item in Model.AsEnumerable())
+    {
+      <li data-action="click->categories--results#select">
+        @item.Name
+        <span hidden>@item.Id</span>
+      </li>
+    }
+  </ul>
+</turbo-frame>

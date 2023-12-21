@@ -27,12 +27,12 @@ public class Create
         return ValueTask.FromResult((command.Model, errors));
       }
 
-      var region = command.Model.FromDto();
+      var product = command.Model.FromDto();
 
-      db.Products.Add(region);
+      db.Products.Add(product);
 
       db.CommitAsync(cancellationToken);
-      command.Model.Id = region.Id;
+      command.Model.Id = product.Id;
       return ValueTask.FromResult((command.Model, errors));
     }
   }

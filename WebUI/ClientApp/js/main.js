@@ -1,6 +1,7 @@
 import '../css/site.css'
 
 import * as Turbo from '@hotwired/turbo'
+import { registerControllers } from 'stimulus-vite-helpers'
 
 Turbo.session.drive = true
 
@@ -9,15 +10,5 @@ import './signalRTurboStreamElement'
 import { Application } from "@hotwired/stimulus"
 const application = Application.start();
 
-const controllers = import.meta.glob('./**/*_controller.js')
-
-Object.entries(controllers).forEach((obj, idx) => {
-  const path = obj[0]
-  const controllerName = path.substring('./controllers/'.length, path.length - '_controller.js'.length)
-
-  import(path)
-    .then(controller => {
-      application.register(controllerName, controller.default)
-    })
-
-});
+const controllers = import.meta.glob('../controllers/**/*_controller.js', { eager: true })
+registerControllers(application, controllers)

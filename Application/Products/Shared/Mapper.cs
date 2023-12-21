@@ -7,7 +7,7 @@ using X.PagedList;
 [Mapper]
 public static partial class Mapper
 {
-  public static partial Product ToDto(this Domain.Product? Product);
-  public static partial Domain.Product FromDto(this Product Product);
-  public static partial IList<Product> ProjectToDto(this IList<Domain.Product> q);
+  public static partial Product ToDto(this Domain.Product? product);
+  public static partial Domain.Product FromDto(this Product product);
+  public static partial IEnumerable<Product> ProjectToDto(this IList<Domain.Product> q);
 }

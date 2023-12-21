@@ -81,4 +81,12 @@ public class CategoriesController(ISender mediator) : Controller
     await mediator.Send(command);
     return RedirectToAction(nameof(Index));
   }
+
+  
+  public async Task<ViewResult> Search([FromQuery]Search.Query query)
+  {
+    var result = await mediator.Send(query);
+    return View("_Results",  result); 
+  }
+    
 }

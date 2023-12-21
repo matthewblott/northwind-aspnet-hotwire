@@ -24,7 +24,17 @@ public abstract class Seed
         PostCode = faker.Address.ZipCode(),
       });
     }
-
+    
+    // Categories
+    foreach (var _ in Enumerable.Range(1, 50))
+    {
+      context.Categories.Add(new Category
+      {
+        Name = faker.Commerce.ProductName(),
+        Description = faker.Commerce.ProductDescription(),
+      });
+    }
+    
     // Customer
     foreach (var _ in Enumerable.Range(1, 50))
     {
@@ -66,11 +76,13 @@ public abstract class Seed
     {
       context.Products.Add(new Product
       {
+        Code = faker.Commerce.Product(),  
         Name = faker.Commerce.ProductName(),
         QuantityPerUnit = string.Empty,
       });
     }
-      
+
+    context.SaveChangesAsync();
     context.CommitAsync();
   }
 }

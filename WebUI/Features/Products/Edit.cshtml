@@ -3,6 +3,7 @@
 
 <h1>Edit Product</h1>
 
+<form method="post" id="product-form"></form>
 <button asp-action="Update" form="product-form">Update</button>
 <button form="product-delete-form">Delete</button>
 <a role="button" asp-action="Show" asp-route-id="@Model.Id">Cancel</a>

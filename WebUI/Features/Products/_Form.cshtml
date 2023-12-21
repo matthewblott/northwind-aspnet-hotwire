@@ -1,28 +1,31 @@
+@using Northwind.WebUI.Features.Categories
 @using Northwind.Application.Products.Shared.Models
 @model Product
 
-<form method="post" id="product-form">
-  <input asp-for="Id" type="hidden" asp-model-prefix>
-  <fieldset>
-    <field>
-      <label asp-for="Name"></label>
-      <input asp-for="Name" asp-model-prefix>
-      <span asp-validation-for="Name"></span>
-    </field>
-    <field>
-      <label asp-for="CategoryId"></label>
-      <input asp-for="CategoryId" asp-model-prefix>
-      <span asp-validation-for="CategoryId"></span>
-    </field>
-    <field>
-      <label asp-for="QuantityPerUnit"></label>
-      <input asp-for="QuantityPerUnit" asp-model-prefix>
-      <span asp-validation-for="QuantityPerUnit"></span>
-    </field>
-    <field>
-      <label asp-for="UnitPrice"></label>
-      <input asp-for="UnitPrice" asp-model-prefix>
-      <span asp-validation-for="UnitPrice"></span>
-    </field>
-  </fieldset>
-</form>
+<input asp-for="Id" type="hidden" asp-model-prefix form="product-form">
+<fieldset>
+  <field>
+    <label asp-for="Name"></label>
+    <input asp-for="Name" asp-model-prefix form="product-form">
+    <span asp-validation-for="Name"></span>
+  </field>
+  <field>
+    <label asp-for="Code"></label>
+    <input asp-for="Code" asp-model-prefix form="product-form">
+    <span asp-validation-for="Code"></span>
+  </field>
+  @await Html.PartialAsync("../Categories/_Search", new Variables
+  {
+    CategoryId = Model.CategoryId, FormName = "product-form"
+  })
+  <field>
+    <label asp-for="QuantityPerUnit"></label>
+    <input asp-for="QuantityPerUnit" asp-model-prefix form="product-form">
+    <span asp-validation-for="QuantityPerUnit"></span>
+  </field>
+  <field>
+    <label asp-for="UnitPrice"></label>
+    <input asp-for="UnitPrice" asp-model-prefix form="product-form">
+    <span asp-validation-for="UnitPrice"></span>
+  </field>
+</fieldset>

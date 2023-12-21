@@ -3,6 +3,7 @@ namespace Northwind.Application.Products.Shared.Models;
 public record Product
 {
   public int Id { get; set; }
+  public string Code { get; set; }
   public string Name { get; set; }
   public int SupplierId { get; set; }
   public int CategoryId { get; set; }

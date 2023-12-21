@@ -1,0 +1,33 @@
+@using Northwind.WebUI.Features.Categories
+@model Variables
+
+<field
+  data-controller="categories--search"
+  data-action="categories--results:selected@window->categories--search#selected"
+  >
+  <label for="Category">Category</label> 
+  <input
+    id="Category"  
+    name="Q" 
+    form="the_form"
+    data-categories--search-target="the_input" 
+    data-action="categories--search#query"
+  >
+  <turbo-frame id="search-frame" data-turbo-frame="search-frame">
+    <form method="get" asp-controller="Categories" asp-action="Search" id="the_form"></form>
+  </turbo-frame>
+  <button style="display: none"
+          type="submit"
+          form="the_form"
+          data-categories--search-target="the_submit"
+  >
+  </button>
+  <input for="CategoryId"
+         value="@Model.CategoryId"
+         name="CategoryId" 
+         type="hidden" 
+         form="@Model.FormName"
+         data-categories--search-target="the_value"
+         asp-model-prefix 
+  >
+</field>

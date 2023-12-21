@@ -28,7 +28,7 @@ return;
 static void RegisterServices(IHostApplicationBuilder builder)
 {
   var services = builder.Services;
-  var connectionString = $"Data Source={Path.Combine(builder.Environment.ContentRootPath, "data", "northwind.sqlite")}";
+  var connectionString = $"Data Source={Path.Combine(builder.Environment.ContentRootPath, "Storage", "northwind.sqlite3")}";
     
   services.AddInfrastructure(connectionString);
   services.AddControllersWithViews().AddFeatureFolders().AddRazorRuntimeCompilation();
@@ -36,9 +36,6 @@ static void RegisterServices(IHostApplicationBuilder builder)
   services.AddTransient<IRazorPartialToStringRenderer, RazorPartialToStringRenderer>();
   services.AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped);
   services.AddSignalR();
-  
-  services.AddScoped<IValidator<Employee>, EmployeeValidator>();
-    
 }
 
 static void Seed(IHost app)

@@ -20,7 +20,6 @@
     <PackageReference Include="OdeToCode.AddFeatureFolders" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.16" />
-<!--    <PackageReference Include="X.PagedList.EF" Version="9.0.0-prerelease" />-->
     <PackageReference Include="X.PagedList.Mvc.Core" Version="9.0.0-prerelease" />
   </ItemGroup>
 
@@ -30,26 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Features\Customers\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Customers\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Customers\New.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Customers\Show.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Customers\_Form.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Employees\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Employees\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Employees\New.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Employees\Show.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Employees\_Form.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Regions\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Regions\Index.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Regions\New.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Regions\Show.cshtml" />
-    <_ContentIncludedByDefault Remove="Features\Regions\_Form.cshtml" />
+    <Folder Include="Storage\" />
   </ItemGroup>
 
   <Target Name="EnsureNodeModules" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(ClientAppFolder)\node_modules') ">
